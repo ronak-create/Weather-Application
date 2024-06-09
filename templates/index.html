@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+    }
+    .above {
+      position: fixed;
+      width: 100%;
+      z-index: 200;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px -3px #000;
+      transition: 1s;
+    }
+
+    .heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Varela Round", sans-serif;
+      font-size: 1.5rem;
+      color: #000;
+      margin: 10px 0;
+    }
+
+    form {
+      display: flex;
+      width: 100%;
+      height: auto;
+      justify-content: space-around;
+      align-items: center;
+      transition: 0.2s;
+      flex-wrap: wrap;
+      & input {
+        margin: 10px 0;
+        padding: 10px 70px;
+        font-size: 1.2rem;
+        padding-left: 20px;
+        border-radius: 50px;
+        background: rgb(235, 235, 235);
+        border: none;
+        outline: none;
+      }
+      & button {
+        padding: 15px 30px;
+        border-radius: 20px;
+        border: none;
+        margin: 10px 70px;
+        font-family: "Roboto", sans-serif;
+        outline: none;
+        transition: 0.3s;
+        &:hover {
+          cursor: pointer;
+          background: #000;
+          color: #fff;
+        }
+      }
+    }
+
+    .descript {
+      z-index: 5000;
+      color: #000;
+      width: 170px;
+      margin: 20px;
+      border-radius: 20px;
+      padding: 5px;
+      background: rgba(211, 211, 211, 0.378);
+      text-align: center;
+      font-size: 1rem;
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+  <body>
+    <div class="above">
+      <div class="heading">Weather Condition</div>
+      <form action="/" method="post">
+        <input type="text" id="cityName" name="cityName" placeholder="City" />
+        <input type="text" id="stateName" name="stateName" value="GJ" />
+        <input type="text" id="countryName" name="countryName" value="India" />
+        <button>Find</button>
+      </form>
+      <div class="descript">
+        {%if data%} {{data.main}}: {{data.description}} <br />
+        {{data.temperature}} °C {%endif%}
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.5.5/build/spline-viewer.js"
+    ></script>
+    {%if data%} {%if "d" in data.icon%}
+    <spline-viewer
+      url="https://prod.spline.design/lkloWAqunnUGrfhK/scene.splinecode"
+    ></spline-viewer>
+    {%if data.icon in ['02d','03d','04d']%}
+    <spline-viewer
+      style="position: absolute; z-index: 100; top: 0"
+      url="https://prod.spline.design/64KdKunIRc-zDx8m/scene.splinecode"
+    ></spline-viewer>
+    {%endif%} {%if data.icon in ['10d','09d']%}
+    <spline-viewer
+      style="position: absolute; z-index: 100; top: 0"
+      url="https://prod.spline.design/I3KAmEgYkRAstuGZ/scene.splinecode"
+    ></spline-viewer>
+    {%endif%}
+    {%if data.icon == "11d"%}
+    <spline-viewer style="position: absolute; top: 0; z-index: 100;" url="https://prod.spline.design/dwJTzAidTDpdy7It/scene.splinecode"></spline-viewer>
+    {%endif%} {%endif%} {%if "n" in data.icon%}
+    <spline-viewer
+      url="https://prod.spline.design/Qi9tIFGM83u5BoZy/scene.splinecode"
+    ></spline-viewer>
+    {%if data.icon in ['02n','03n','04n']%}
+    <spline-viewer
+      style="position: absolute; z-index: 100; top: 0"
+      url="https://prod.spline.design/64KdKunIRc-zDx8m/scene.splinecode"
+    ></spline-viewer>
+    {%endif%} {%if data.icon in ['10n','09n']%}
+    <spline-viewer
+      style="position: absolute; z-index: 100; top: 0"
+      url="https://prod.spline.design/I3KAmEgYkRAstuGZ/scene.splinecode"
+    ></spline-viewer>
+    {%endif%}    {%if data.icon == "11n"%}
+    <spline-viewer style="position: absolute; top: 0; z-index: 100;" url="https://prod.spline.design/dwJTzAidTDpdy7It/scene.splinecode"></spline-viewer>
+    {%endif%} {%endif%} {% else %}
+    <h1
+      style="position:absolute; top: 30%; font-size: 2rem; background: red; width: 100%; text-align: center; z-index: 200000000;"
+    >
+      Enter Valid Location
+    </h1>
+    + {%endif%}
+  </body>
+</html>
