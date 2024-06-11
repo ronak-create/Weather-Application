@@ -1,3 +1,4 @@
+!["Weather App Landing"](weather_app_landing.png)
 ## Flask Weather App with 3D Scenes ☁️✨
 
 This Flask application displays the current weather conditions and a corresponding 3D weather scene for a user-specified location.
